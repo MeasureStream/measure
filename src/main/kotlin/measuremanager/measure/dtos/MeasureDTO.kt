@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.PastOrPresent
 import measuremanager.measure.entities.Measure
 
+
 data class MeasureDTO (
 
     val id : String?,
