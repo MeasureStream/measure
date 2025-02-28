@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f14258c5-a9c8-4215-8edc-fc0be4f296ce" name="Changes" comment="init">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/measuremanager/measure/configurations/SecurityConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/measuremanager/measure/configurations/SecurityConfig.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/measuremanager/measure/controllers/MeasureController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/measuremanager/measure/controllers/MeasureController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,6 +97,8 @@
       <workItem from="1740649453358" duration="11000" />
       <workItem from="1740649493602" duration="4319000" />
       <workItem from="1740663319567" duration="593000" />
+      <workItem from="1740734075403" duration="290000" />
+      <workItem from="1740738745441" duration="90000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
