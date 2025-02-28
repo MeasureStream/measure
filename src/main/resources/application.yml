@@ -9,7 +9,7 @@ spring:
           issuer-uri: http://172.20.0.22:8080/realms/measurestream
   data:
     mongodb:
-      uri: mongodb://root:password@mongodb:27017/mydatabase
+      uri: mongodb://root:secret@mongodb:27017/mydatabase
       # Se vuoi definire altre opzioni come il database di default, puoi farlo qui:
       database: mydatabase
 server:
