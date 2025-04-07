@@ -25,7 +25,7 @@ class MeasureController(private val ms: MeasureService) {
 
         return ms.getAllP(start,end,p)
     }
-    @GetMapping("/","")
+    @GetMapping("/nodeId/","/nodeId")
     fun getNode(@RequestParam(required = false) start: Instant?, @RequestParam(required = false) end:Instant?, @RequestParam(required = true) nodeId:Long ) : List<MeasureDTO> {
         return ms.getNode(start, end, nodeId)
     }
