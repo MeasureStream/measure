@@ -14,9 +14,9 @@ interface MeasureRepository :  MongoRepository<Measure, String> {
     fun findByTimeBetween(start: Instant, end: Instant, pageable: Pageable): Page<Measure>
     fun findByTimeBefore(end: Instant) : List<Measure>
     fun findByTimeBefore(end: Instant, pageable: Pageable) : Page<Measure>
-    fun findAllByNodeIdAndTimeBetween(nodeId: Long,start: Instant, end: Instant): List<Measure>
-    fun findAllByNodeIdAndTimeBefore(nodeId: Long, end:Instant) : List<Measure>
-    fun findAllByNodeId(nodeId: Long):List<Measure>
+    fun findAllByNodeIdAndMeasureUnitAndTimeBetween(nodeId: Long, measureUnit: String, time: Instant, time2: Instant): List<Measure>
+    fun findAllByNodeIdAndMeasureUnitAndTimeBefore(nodeId: Long, measureUnit: String, time: Instant) : List<Measure>
+    fun findAllByNodeIdAndMeasureUnit(nodeId: Long, measureUnit: String):List<Measure>
     @Aggregation(pipeline = [
         "{ '\$match': { 'nodeId': ?0 } }",
         "{ '\$group': { '_id': '\$measureUnit' } }"
