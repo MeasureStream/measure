@@ -46,6 +46,10 @@ class MeasureServiceImpl(
         }
     }
 
+    override fun getMeasureUnit(nodeId: Long): List<String> {
+        return mr.findDistinctMeasureUnitsByNodeId(nodeId)
+    }
+
     override fun getAllP(start: Instant?, end: Instant?, page: Pageable): Page<MeasureDTO> {
         return when {
             start != null && end != null -> {
