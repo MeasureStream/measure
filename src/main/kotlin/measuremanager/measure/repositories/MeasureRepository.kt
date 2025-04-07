@@ -13,4 +13,7 @@ interface MeasureRepository :  MongoRepository<Measure, String> {
     fun findByTimeBetween(start: Instant, end: Instant, pageable: Pageable): Page<Measure>
     fun findByTimeBefore(end: Instant) : List<Measure>
     fun findByTimeBefore(end: Instant, pageable: Pageable) : Page<Measure>
+    fun findAllByNodeIdAndTimeBetween(nodeId: Long,start: Instant, end: Instant): List<Measure>
+    fun findAllByNodeIdAndTimeBefore(nodeId: Long, end:Instant) : List<Measure>
+    fun findAllByNodeId(nodeId: Long):List<Measure>
 }

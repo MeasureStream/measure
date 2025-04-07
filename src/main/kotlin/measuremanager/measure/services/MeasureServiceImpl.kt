@@ -29,6 +29,23 @@ class MeasureServiceImpl(
         }
     }
 
+    override fun getNode(start: Instant?, end: Instant?, nodeId:Long): List<MeasureDTO> {
+        return when {
+            start != null && end != null -> {
+                mr.findAllByNodeIdAndTimeBetween(nodeId,start,end).map { it.toDTO() }
+            }
+            start != null && end == null  -> {
+                mr.findAllByNodeIdAndTimeBetween(nodeId,start, Instant.now()).map { it.toDTO() }
+            }
+            start == null && end != null -> {
+                mr.findAllByNodeIdAndTimeBefore(nodeId, end).map { it.toDTO() }
+            }
+            else ->{
+                mr.findAllByNodeId(nodeId).map{ it.toDTO() }
+            }
+        }
+    }
+
     override fun getAllP(start: Instant?, end: Instant?, page: Pageable): Page<MeasureDTO> {
         return when {
             start != null && end != null -> {

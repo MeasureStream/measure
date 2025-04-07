@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+
 import java.time.Instant
 
 @RestController
@@ -20,8 +21,12 @@ class MeasureController(private val ms: MeasureService) {
     }
 
     @GetMapping("/P","P")
-    fun getP(@RequestParam(required = false) start: Instant?, @RequestParam(required = false) end:Instant? , @RequestParam(required = true) p:Pageable ) : Page<MeasureDTO> {
+    fun getP(@RequestParam(required = false) start: Instant?, @RequestParam(required = false) end:Instant? , @RequestParam(required = true) p: Pageable) : Page<MeasureDTO> {
 
         return ms.getAllP(start,end,p)
+    }
+    @GetMapping("/","")
+    fun getNode(@RequestParam(required = false) start: Instant?, @RequestParam(required = false) end:Instant?, @RequestParam(required = true) nodeId:Long ) : List<MeasureDTO> {
+        return ms.getNode(start, end, nodeId)
     }
 }

@@ -10,4 +10,5 @@ interface MeasureService {
     fun getAllP(start: Instant?, end: Instant?, page:Pageable): Page<MeasureDTO>
     fun create(m : MeasureDTO): MeasureDTO
     fun delete(m : MeasureDTO)
+    fun getNode(start: Instant?, end: Instant?, nodeId:Long): List<MeasureDTO>
 }
