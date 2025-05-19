@@ -7,10 +7,10 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: https://auth.christiandellisanti.uk/realms/measurestream
-  data:
-    mongodb:
-      uri: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongodb:27017/${MONGO_INITDB_DATABASE}
+  #data:
+  #  mongodb:
+  #    uri: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongodb:27017/${MONGO_INITDB_DATABASE}
       # Se vuoi definire altre opzioni come il database di default, puoi farlo qui:
-      database: ${MONGO_INITDB_DATABASE}
+  #    database: ${MONGO_INITDB_DATABASE}
 server:
   port: 8080
