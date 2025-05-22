@@ -14,7 +14,7 @@ spring:
   #    database: ${MONGO_INITDB_DATABASE}
 
   kafka:
-    bootstrap-servers: 172.20.0.30:9092
+    bootstrap-servers: kafka:29092
     consumer:
       group-id: measurestream
       auto-offset-reset: earliest
