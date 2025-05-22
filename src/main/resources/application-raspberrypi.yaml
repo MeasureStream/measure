@@ -12,5 +12,18 @@ spring:
   #    uri: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongodb:27017/${MONGO_INITDB_DATABASE}
       # Se vuoi definire altre opzioni come il database di default, puoi farlo qui:
   #    database: ${MONGO_INITDB_DATABASE}
+
+  kafka:
+    bootstrap-servers: 172.20.0.30:9092
+    consumer:
+      group-id: measurestream
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
 server:
   port: 8080
+
+
+
+
