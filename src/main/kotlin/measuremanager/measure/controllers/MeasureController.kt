@@ -68,7 +68,7 @@ class MeasureController(private val ms: MeasureService) {
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @DeleteMapping("/nodeId/","/nodeId")
-    fun deleteNode(@RequestParam(required = false) start: Instant?, @RequestParam(required = false) end:Instant?, @RequestParam(required = true) nodeId:Long, @RequestParam(required = true) measureUnit:String  ) : List<MeasureDTO> {
-        return ms.getNode(start, end, nodeId, measureUnit)
+    fun deleteNode(@RequestParam(required = false) start: Instant?, @RequestParam(required = false) end:Instant?, @RequestParam(required = true) nodeId:Long, @RequestParam(required = true) measureUnit:String  ) {
+        return ms.deleteNode(start,end, nodeId, measureUnit)
     }
 }
