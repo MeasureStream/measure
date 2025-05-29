@@ -22,4 +22,6 @@ interface MeasureRepository :  MongoRepository<Measure, String> {
         "{ '\$group': { '_id': '\$measureUnit' } }"
     ])
     fun findDistinctMeasureUnitsByNodeId(nodeId: Long): List<String>
+
+    //fun findAllByNodeIdAndMeasureUnitAndTimeBetween(nodeId: Long, measureUnit: String, start: Instant, end: Instant) : List<Measure>
 }

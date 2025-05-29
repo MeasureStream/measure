@@ -12,4 +12,5 @@ interface MeasureService {
     fun delete(m : MeasureDTO)
     fun getNode(start: Instant?, end: Instant?, nodeId:Long, measureUnit: String): List<MeasureDTO>
     fun getMeasureUnit(nodeId: Long): List<String>
+    fun deleteNode(start: Instant?, end: Instant?, nodeId:Long, measureUnit: String)
 }

@@ -29,6 +29,8 @@ class MeasureServiceImpl(
         }
     }
 
+
+
     override fun getNode(start: Instant?, end: Instant?, nodeId: Long, measureUnit: String): List<MeasureDTO> {
         return when {
             start != null && end != null -> {
@@ -48,6 +50,28 @@ class MeasureServiceImpl(
 
     override fun getMeasureUnit(nodeId: Long): List<String> {
         return mr.findDistinctMeasureUnitsByNodeId(nodeId)
+    }
+
+    override fun deleteNode(start: Instant?, end: Instant?, nodeId: Long, measureUnit: String) {
+         when {
+            start != null && end != null -> {
+
+                val measures  = mr.findAllByNodeIdAndMeasureUnitAndTimeBetween(nodeId,measureUnit,start,end)
+                mr.deleteAll(measures)
+            }
+            start != null && end == null  -> {
+                val measures  =  mr.findAllByNodeIdAndMeasureUnitAndTimeBetween(nodeId,measureUnit,start, Instant.now())
+                mr.deleteAll(measures)
+            }
+            start == null && end != null -> {
+                val measures  = mr.findAllByNodeIdAndMeasureUnitAndTimeBefore(nodeId,measureUnit ,end)
+                mr.deleteAll(measures)
+            }
+            else ->{
+                val measures  = mr.findAllByNodeIdAndMeasureUnit(nodeId,measureUnit)
+                mr.deleteAll(measures)
+            }
+        }
     }
 
     override fun getAllP(start: Instant?, end: Instant?, page: Pageable): Page<MeasureDTO> {
