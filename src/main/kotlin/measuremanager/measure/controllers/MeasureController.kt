@@ -1,6 +1,8 @@
 package measuremanager.measure.controllers
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializationFeature
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import measuremanager.measure.dtos.MeasureDTO
 import measuremanager.measure.services.MeasureService
 import org.springframework.data.domain.Page
@@ -46,6 +48,9 @@ class MeasureController(private val ms: MeasureService) {
 
         // Serializza i dati in JSON
         val objectMapper = ObjectMapper()
+            .registerModule(JavaTimeModule())   // <-- aggiungi questo
+            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+
         val jsonData = objectMapper.writeValueAsBytes(measures)
 
         val headers = HttpHeaders().apply {
