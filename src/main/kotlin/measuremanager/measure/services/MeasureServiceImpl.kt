@@ -6,6 +6,8 @@ import measuremanager.measure.dtos.toDTO
 import measuremanager.measure.repositories.MeasureRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.oauth2.jwt.Jwt
 import org.springframework.stereotype.Service
 import java.time.Instant
 @Service
@@ -13,6 +15,7 @@ class MeasureServiceImpl(
     private val mr: MeasureRepository
 ): MeasureService {
     override fun getAll(start: Instant?, end: Instant?): List<MeasureDTO> {
+        println("current user info ${getCurrentUserInfo()}")
         return when {
             start != null && end != null -> {
                  mr.findByTimeBetween(start,end).map { it.toDTO() }
@@ -32,6 +35,7 @@ class MeasureServiceImpl(
 
 
     override fun getNode(start: Instant?, end: Instant?, nodeId: Long, measureUnit: String): List<MeasureDTO> {
+        println("current user info ${getCurrentUserInfo()}")
         return when {
             start != null && end != null -> {
                 mr.findAllByNodeIdAndMeasureUnitAndTimeBetween(nodeId,measureUnit,start,end).map { it.toDTO() }
@@ -97,5 +101,22 @@ class MeasureServiceImpl(
 
     override fun delete(m: MeasureDTO) {
         TODO("Not yet implemented")
+    }
+
+    fun isAdmin() : Boolean{
+        val auth = SecurityContextHolder.getContext().authentication
+        val isAdmin = auth.authorities.any { it.authority == "ROLE_app-admin" }
+        return isAdmin
+    }
+    fun getCurrentUserInfo(): Map<String, String?> {
+        val auth = SecurityContextHolder.getContext().authentication
+        val jwt = auth.principal as Jwt
+        return mapOf(
+            "userId" to jwt.subject,
+            "email" to jwt.getClaim<String>("email"),
+            "givenName" to jwt.getClaim<String>("given_name"),
+            "familyName" to jwt.getClaim<String>("family_name"),
+            "preferredUsername" to jwt.getClaim<String>("preferred_username")
+        )
     }
 }
