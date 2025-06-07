@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import measuremanager.measure.dtos.EventMU
 import measuremanager.measure.entities.Measure
 import measuremanager.measure.entities.MeasurementUnit
-import measuremanager.measure.entities.Node
 import measuremanager.measure.repositories.MeasureRepository
 import measuremanager.measure.repositories.MURepository
 import org.springframework.kafka.annotation.KafkaListener
