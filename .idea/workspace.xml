@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f14258c5-a9c8-4215-8edc-fc0be4f296ce" name="Changes" comment="fix: dependency">
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+    <list default="true" id="f14258c5-a9c8-4215-8edc-fc0be4f296ce" name="Changes" comment="feat: current user info">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/measuremanager/measure/services/MeasureServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/measuremanager/measure/services/MeasureServiceImpl.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,6 +185,10 @@
       <workItem from="1747732711120" duration="2057000" />
       <workItem from="1747839308863" duration="25000" />
       <workItem from="1747840304510" duration="29000" />
+      <workItem from="1748522232590" duration="4917000" />
+      <workItem from="1748881599314" duration="232000" />
+      <workItem from="1748881905718" duration="8757000" />
+      <workItem from="1749043131883" duration="476000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -234,7 +238,39 @@
       <option name="project" value="LOCAL" />
       <updated>1747732254919</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="feat: delete /nodeId/ and download">
+      <option name="closed" value="true" />
+      <created>1748523291289</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1748523291289</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fix: download">
+      <option name="closed" value="true" />
+      <created>1748526035427</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1748526035427</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fix: delete">
+      <option name="closed" value="true" />
+      <created>1748526684450</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1748526684450</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat: current user info">
+      <option name="closed" value="true" />
+      <created>1748886655812</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1748886655812</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -247,6 +283,10 @@
     <MESSAGE value="fix: Dockerfile" />
     <MESSAGE value="feat: raspberrypi profile" />
     <MESSAGE value="fix: dependency" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: dependency" />
+    <MESSAGE value="feat: delete /nodeId/ and download" />
+    <MESSAGE value="fix: download" />
+    <MESSAGE value="fix: delete" />
+    <MESSAGE value="feat: current user info" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: current user info" />
   </component>
 </project>

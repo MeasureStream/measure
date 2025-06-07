@@ -15,7 +15,7 @@ class MeasureServiceImpl(
     private val mr: MeasureRepository
 ): MeasureService {
     override fun getAll(start: Instant?, end: Instant?): List<MeasureDTO> {
-        println("current user info ${getCurrentUserInfo()}")
+        //println("current user info ${getCurrentUserInfo()}")
         return when {
             start != null && end != null -> {
                  mr.findByTimeBetween(start,end).map { it.toDTO() }
@@ -35,7 +35,7 @@ class MeasureServiceImpl(
 
 
     override fun getNode(start: Instant?, end: Instant?, nodeId: Long, measureUnit: String): List<MeasureDTO> {
-        println("current user info ${getCurrentUserInfo()}")
+        //println("current user info ${getCurrentUserInfo()}")
         return when {
             start != null && end != null -> {
                 mr.findAllByNodeIdAndMeasureUnitAndTimeBetween(nodeId,measureUnit,start,end).map { it.toDTO() }
