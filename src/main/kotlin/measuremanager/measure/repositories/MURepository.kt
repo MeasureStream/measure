@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface MURepository: MongoRepository<MeasurementUnit,String> {
     fun deleteByMuNetworkId(muNetworkId: Long)
+    fun findByMuNetworkId(muNetworkId: Long) : MeasurementUnit?
 }

@@ -2,17 +2,20 @@ package measuremanager.measure.services
 
 import measuremanager.measure.dtos.MeasureDTO
 import measuremanager.measure.dtos.toDTO
+import measuremanager.measure.repositories.MURepository
 
 import measuremanager.measure.repositories.MeasureRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
+import org.springframework.data.mongodb.core.spel.OperatorNode
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.oauth2.jwt.Jwt
 import org.springframework.stereotype.Service
 import java.time.Instant
 @Service
 class MeasureServiceImpl(
-    private val mr: MeasureRepository
+    private val mr: MeasureRepository,
+    private val mur:MURepository
 ): MeasureService {
     override fun getAll(start: Instant?, end: Instant?): List<MeasureDTO> {
         //println("current user info ${getCurrentUserInfo()}")
@@ -57,6 +60,9 @@ class MeasureServiceImpl(
     }
 
     override fun deleteNode(start: Instant?, end: Instant?, nodeId: Long, measureUnit: String) {
+        val mu = mur.findByMuNetworkId(nodeId)
+        val userId = getCurrentUserId()
+        if (mu!!.userId != userId && !isAdmin() ) throw Exception("Operation not allowed ")
          when {
             start != null && end != null -> {
 
@@ -118,5 +124,11 @@ class MeasureServiceImpl(
             "familyName" to jwt.getClaim<String>("family_name"),
             "preferredUsername" to jwt.getClaim<String>("preferred_username")
         )
+    }
+
+    fun getCurrentUserId(): String {
+        val auth = SecurityContextHolder.getContext().authentication
+        val jwt = auth.principal as Jwt
+        return jwt.subject  // oppure jwt.getClaim<String>("preferred_username")
     }
 }
