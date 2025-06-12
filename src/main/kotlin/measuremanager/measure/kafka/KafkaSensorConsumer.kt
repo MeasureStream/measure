@@ -25,8 +25,8 @@ class KafkaSensorConsumer(private val mr: MeasureRepository, private val objectM
         }
 
     }
-
-    @KafkaListener(topics = ["mus"], groupId = "measurestream-mus")
+//changed to mus to node-event
+    @KafkaListener(topics = ["node-event"], groupId = "measurestream-mus")
     fun consumeNode(message: String) {
         try {
 
