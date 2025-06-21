@@ -1,7 +1,7 @@
 package measuremanager.measure.kafka
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import measuremanager.measure.dtos.EventMU
+import com.polito.tesi.measuremanager.dtos.EventNode
 import measuremanager.measure.entities.Measure
 import measuremanager.measure.entities.MeasurementUnit
 import measuremanager.measure.repositories.MeasureRepository
@@ -30,19 +30,24 @@ class KafkaSensorConsumer(private val mr: MeasureRepository, private val objectM
     fun consumeNode(message: String) {
         try {
 
-            val muData = objectMapper.readValue(message, EventMU::class.java)
-            when (muData.eventType) {
+            val event = objectMapper.readValue(message, EventNode::class.java)
+            when (event.eventType) {
                 "CREATE" -> {
-                    mur.save(MeasurementUnit().apply { muNetworkId = muData.mu.muNetworkId; userId = muData.mu.userId })
+                    mur.save(MeasurementUnit().apply { muNetworkId = event.node.networkId; userId = event.node.userId })
+                    println("CREATED node ${event.node}")
                 }
 
-                "DELETE" -> { mur.deleteByMuNetworkId(muData.mu.muNetworkId) }
+                "DELETE" -> {
+                    mur.deleteByMuNetworkId(event.node.networkId)
+                    println("DELETED node ${event.node}")
+                }
+
                 else -> {
-                    throw Exception("OPERATION NOT recognized $muData")
+                    throw Exception("OPERATION NOT recognized $event")
                 }
             }
 
-            println("Received node data: $muData")
+            println("Received node data: $event")
         } catch (e: Exception) {
             println("Error parsing node message: $message")
             e.printStackTrace()
