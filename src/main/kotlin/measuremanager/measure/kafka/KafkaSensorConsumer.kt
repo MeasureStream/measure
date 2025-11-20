@@ -57,8 +57,8 @@ class KafkaSensorConsumer(
             val trimmedMessage = message.trim().removeSurrounding("\"")
             println("trimmedMessage message: $trimmedMessage")
             val decodedKafka = Base64.getDecoder().decode(trimmedMessage)
-            println("decoded message:  $decodedKafka")
             val jsonStr = String(decodedKafka)
+            println("decoded message:  $jsonStr")
             val root: JsonNode = objectMapper.readTree(jsonStr)
 
             val dataNode =

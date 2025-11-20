@@ -8,9 +8,8 @@ plugins {
     id("io.spring.dependency-management") version "1.1.7"
 }
 
-
 group = "measuremanager"
-version = "1.0.2-alpha"
+version = "1.1.0-alpha"
 
 java {
     toolchain {
@@ -54,3 +53,4 @@ tasks.withType<BootBuildImage> {
         imageName.set("christiand9699/measure:${rootProject.version}")
     }
 }
+
