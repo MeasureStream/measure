@@ -61,10 +61,6 @@ class KafkaSensorConsumer(
             println("decoded message:  $jsonStr")
             val root: JsonNode = objectMapper.readTree(jsonStr)
 
-            val dataNode =
-                root["data"]
-                    ?: throw Exception("Missing 'data' field in message")
-
             // Device ID
             val deviceId = 1
             // dataNode["end_device_ids"]?.get("device_id")?.asText()
@@ -72,7 +68,7 @@ class KafkaSensorConsumer(
 
             // Base64 LoRaWAN uplink
             val frmPayload =
-                dataNode["uplink_message"]?.get("frm_payload")?.asText()
+                root["uplink_message"]?.get("frm_payload")?.asText()
                     ?: throw Exception("Missing frm_payload in message")
 
             // Decode Base64
