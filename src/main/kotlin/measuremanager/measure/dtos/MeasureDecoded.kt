@@ -1,9 +1,13 @@
 package measuremanager.measure.dtos
+import kotlinx.serialization.Serializable
 import java.time.Instant
 
+@Serializable
 data class MeasureDecoded(
     val value: Double,
     val unit: String,
     val nodeId: Long,
-    val time: Instant,
+    val rssi: Int,
+    val devEUI: String,
+    val time: String,
 )

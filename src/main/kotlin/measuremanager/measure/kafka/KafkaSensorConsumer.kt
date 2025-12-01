@@ -20,77 +20,27 @@ class KafkaSensorConsumer(
     private val objectMapper: ObjectMapper,
     private val mur: MURepository,
 ) {
-    private fun decodePayload(bytes: ByteArray): MeasureDecoded {
-        val buffer = ByteBuffer.wrap(bytes).order(java.nio.ByteOrder.BIG_ENDIAN)
-
-        // 1) value (4 bytes)
-        val valueFloat = buffer.float
-
-        // 2) unit (2 bytes → codice)
-        val unitCode = buffer.short.toInt() // esempio: 1=°C, 2=%, etc.
-        val unit = decodeUnit(unitCode)
-
-        // 3) nodeId (4 bytes)
-        val nodeId = buffer.int.toLong()
-
-        return MeasureDecoded(
-            value = valueFloat.toDouble(),
-            unit = unit,
-            nodeId = nodeId,
-            time = Instant.now(),
-        )
-    }
-
-    private fun decodeUnit(code: Int): String =
-        when (code) {
-            1 -> "°C"
-            2 -> "%"
-            3 -> "Pa"
-            else -> "unknown"
-        }
-
-    @KafkaListener(topics = ["ttn-uplink"], groupId = "measurestream")
+    @KafkaListener(topics = ["ttn-uplink-measure"], groupId = "measurestream")
     fun consume(message: String) {
         try {
-            // val data = objectMapper.readValue(message, Measure::class.java)
-            println("arrived message: $message")
-            val trimmedMessage = message.trim().removeSurrounding("\"")
-            println("trimmedMessage message: $trimmedMessage")
-            val decodedKafka = Base64.getDecoder().decode(trimmedMessage)
-            val jsonStr = String(decodedKafka)
-            println("decoded message:  $jsonStr")
-            val root: JsonNode = objectMapper.readTree(jsonStr)
+            println("Arrived message: $message")
 
-            // Device ID
-            val deviceId = 1
-            // dataNode["end_device_ids"]?.get("device_id")?.asText()
-            //    ?: throw Exception("Missing device_id in message")
+            // Parsing del JSON in MeasureDecoded
+            val decoded = objectMapper.readValue(message, MeasureDecoded::class.java)
 
-            // Base64 LoRaWAN uplink
-            val frmPayload =
-                root["uplink_message"]?.get("frm_payload")?.asText()
-                    ?: throw Exception("Missing frm_payload in message")
-
-            // Decode Base64
-            val decodedBytes: ByteArray = Base64.getDecoder().decode(frmPayload)
-
-            // Convert decoded bytes → Measure object
-            val bytes = Base64.getDecoder().decode(frmPayload)
-
-            val decoded = decodePayload(bytes)
-
+            // Conversione nel modello da salvare
             val measure =
                 Measure().apply {
                     value = decoded.value
                     measureUnit = decoded.unit
                     nodeId = decoded.nodeId
-                    time = decoded.time
+                    // rssi = decoded.rssi
+                    // devEui = decoded.devEUI
+                    time = Instant.parse(decoded.time)
                 }
 
-            // Store in MongoDB
             mr.save(measure)
-
-            println("Saved measure from $deviceId: $measure")
+            println("Saved measure: $measure")
         } catch (e: Exception) {
             println("Error parsing message: $message")
             e.printStackTrace()
