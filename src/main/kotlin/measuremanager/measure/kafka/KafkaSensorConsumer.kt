@@ -34,12 +34,29 @@ class KafkaSensorConsumer(
                     value = decoded.value
                     measureUnit = decoded.unit
                     nodeId = decoded.nodeId
-                    // rssi = decoded.rssi
-                    // devEui = decoded.devEUI
+                    time = Instant.parse(decoded.time)
+                }
+
+            val measure1 =
+                Measure().apply {
+                    value = decoded.rssi
+                    measureUnit = "BLE RSSI"
+                    nodeId = decoded.nodeId
+                    time = Instant.parse(decoded.time)
+                }
+
+            val measure2 =
+                Measure().apply {
+                    value = decoded.LoRarssi
+                    measureUnit = "LoRa RSSI"
+                    nodeId = decoded.nodeId
                     time = Instant.parse(decoded.time)
                 }
 
             mr.save(measure)
+            mr.save(measure1)
+            mr.save(measure2)
+
             println("Saved measure: $measure")
         } catch (e: Exception) {
             println("Error parsing message: $message")
