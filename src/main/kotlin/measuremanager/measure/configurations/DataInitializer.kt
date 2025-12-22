@@ -6,6 +6,7 @@ import measuremanager.measure.entities.MeasurementUnit
 import measuremanager.measure.repositories.MURepository
 import measuremanager.measure.repositories.MeasureRepository
 import org.springframework.beans.factory.InitializingBean
+import org.springframework.context.annotation.Profile
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.stereotype.Component
 import java.time.Instant
@@ -60,4 +61,3 @@ class DataInitializer(
         mur.saveAll(mus)
     }
 }
-
