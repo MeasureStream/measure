@@ -39,7 +39,7 @@ class KafkaSensorConsumer(
 
             val measure1 =
                 Measure().apply {
-                    value = decoded.rssi
+                    value = decoded.rssi.toDouble()
                     measureUnit = "BLE RSSI"
                     nodeId = decoded.nodeId
                     time = Instant.parse(decoded.time)
@@ -47,7 +47,7 @@ class KafkaSensorConsumer(
 
             val measure2 =
                 Measure().apply {
-                    value = decoded.LoRarssi
+                    value = decoded.LoRarssi.toDouble()
                     measureUnit = "LoRa RSSI"
                     nodeId = decoded.nodeId
                     time = Instant.parse(decoded.time)
